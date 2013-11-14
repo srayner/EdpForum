@@ -16,6 +16,10 @@ class DiscussController extends AbstractActionController
 
     public function forumsAction()
     {
+        $config = $this->getServiceLocator()->get('config');
+        die(var_dump($config['zfcuser']));
+        
+        
         $tags = $this->getDiscussService()->getTags();
 
         return new ViewModel(array(
@@ -113,6 +117,11 @@ class DiscussController extends AbstractActionController
             $message = $this->getServiceLocator()->get('edpdiscuss_message');
             $message->setThread($thread);
         
+            // Add author if we have a user identity.
+            if ($this->zfcUserAuthentication()->hasIdentity()) {
+                $message->setAuthorUser($this->zfcUserAuthentication()->getIdentity());
+            }
+            
             $form->setHydrator($formHydrator);
             $form->bind($message);
             $form->setData($data);

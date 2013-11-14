@@ -1,5 +1,11 @@
 <?php
 return array(
+
+    'zfcuser' => array(
+        'enable_username' => true,
+        'enable_display_name' => true
+    ),
+    
     'view_manager' => array('template_path_stack' => array(__DIR__ . '/../view')),
     'controllers' => array(
         'invokables' => array(

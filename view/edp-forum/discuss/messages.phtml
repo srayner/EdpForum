@@ -13,7 +13,12 @@
 <div class="panel panel-default">
     <div class="panel-heading clearfix">
         <h4 class="pull-left"><?php echo $message->getSubject(); ?></h4>
-        <small class="text-muted pull-right"><?php echo date_format($message->getPostTime(), 'H:i D d M Y'); ?></small>
+        <div class="pull-right">
+            <small class="text-muted"><?php echo date_format($message->getPostTime(), 'H:i D d M Y'); ?></small><br>
+            <?php if($message->getAuthorUser()): ?>
+            <small class="text-muted"><?php echo $message->getAuthorUser()->getUsername(); ?></small>
+            <?php endif; ?>
+        </div>
     </div>
     <div class="panel-body">
         <p><?php echo $message->getMessage(); ?></p>
