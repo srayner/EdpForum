@@ -15,13 +15,9 @@ class DiscussController extends AbstractActionController
     protected $thread;
 
     public function forumsAction()
-    {
-        $config = $this->getServiceLocator()->get('config');
-        die(var_dump($config['zfcuser']));
-        
-        
+    { 
         $tags = $this->getDiscussService()->getTags();
-
+        
         return new ViewModel(array(
             'tags' => $tags
         ));
@@ -171,6 +167,11 @@ class DiscussController extends AbstractActionController
             // Create a new message and set its thread.
             $message = $this->getServiceLocator()->get('edpdiscuss_message');
             $message->setThread($thread);
+            
+            // Add author if we have a user identity.
+            if ($this->zfcUserAuthentication()->hasIdentity()) {
+                $message->setAuthorUser($this->zfcUserAuthentication()->getIdentity());
+            }
             
             $form->setHydrator($formHydrator);
             $form->bind($message);

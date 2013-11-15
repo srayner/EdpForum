@@ -1,0 +1,28 @@
+<h3>Login</h3>
+
+<ol class="breadcrumb">
+  <li><a href="<?php echo $this->url('forum'); ?>">Forum List</a></li>
+  <li class="active">Login</li>
+</ol>
+
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <h4 class="pull-left"><?php echo $this->translate('Sign In'); ?></h4>
+    </div>
+    <div class="panel-body">
+        <?php
+            $form = $this->loginForm;
+			$form->prepare();
+			$form->setAttribute('action', $this->url('zfcuser/login'));
+			$form->setAttribute('method', 'post');
+			$form->get('identity')->setAttribute('class', 'form-control');
+			$form->get('credential')->setAttribute('class', 'form-control');
+			$form->get('submit')->setAttribute('class', 'btn btn-primary');
+	        echo $this->renderForm($form);	
+        ?>
+    </div>
+</div>
+
+<?php if ($this->enableRegistration) : ?>
+<?php echo $this->translate('Not registered?'); ?> <a href="<?php echo $this->url('zfcuser/register') . ($this->redirect ? '?redirect='.$this->redirect : '') ?>"><?php echo $this->translate('Sign up!'); ?></a>
+<?php endif; ?>

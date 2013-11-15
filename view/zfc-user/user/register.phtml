@@ -1,0 +1,32 @@
+<h3><?php echo $this->translate('Register'); ?></h3>
+
+<ol class="breadcrumb">
+  <li><a href="<?php echo $this->url('forum'); ?>">Forum List</a></li>
+  <li class="active">Register</li>
+</ol>
+
+<?php if (!$this->enableRegistration){
+    echo "Registration is disabled.";
+    return;
+} ?>
+
+<div class="panel panel-primary">
+    <div class="panel-heading clearfix">
+        <h4 class="pull-left"><?php echo $this->translate('Register'); ?></h4>
+    </div>
+    <div class="panel-body">
+        <?php
+            $form = $this->registerForm;
+            $form->prepare();
+            $form->setAttribute('action', $this->url('zfcuser/register'));
+            $form->setAttribute('method', 'post');
+            $form->get('username')->setAttribute('class', 'form-control');
+            $form->get('email')->setAttribute('class', 'form-control');
+            $form->get('display_name')->setAttribute('class', 'form-control');
+            $form->get('password')->setAttribute('class', 'form-control');
+            $form->get('passwordVerify')->setAttribute('class', 'form-control');
+            $form->get('submit')->setAttribute('class', 'btn btn-primary');
+            echo $this->renderForm($form);
+        ?>
+    </div>
+</div>

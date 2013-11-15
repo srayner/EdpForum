@@ -1,0 +1,11 @@
+<h3>Your Details</h3>
+
+<ol class="breadcrumb">
+  <li><a href="<?php echo $this->url('forum'); ?>">Forum List</a></li>
+  <li class="active">Your Details</li>
+</ol>
+
+<div style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
+<h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+<a href="<?php echo $this->url('zfcuser/logout') ?>">[<?php echo $this->translate('Sign Out'); ?>]</a>
+<div style="clear:both;"></div>
